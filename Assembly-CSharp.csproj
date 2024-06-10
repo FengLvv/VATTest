@@ -48,15 +48,19 @@
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Settings" />
-     <Folder Include="Assets\SDF\SDF" />
+     <Folder Include="Assets\SDF\SDF\SDF" />
      <Folder Include="C:\Program Files\Side Effects Software\sidefx_packages\SideFXLabs20.0\unity\shaders\URP_VAT3" />
      <Folder Include="Assets\Scenes" />
+     <None Include="Assets\Shader\Bubble.shader" />
+     <Folder Include="Assets\Shader" />
+     <Folder Include="Assets\SDF\SDF" />
      <None Include="C:\Program Files\Side Effects Software\sidefx_packages\SideFXLabs20.0\unity\shaders\URP_VAT3\VAT Import Settings Guide.txt" />
      <None Include="C:\Program Files\Side Effects Software\sidefx_packages\SideFXLabs20.0\unity\shaders\URP_VAT3\Package Installation Guide.txt" />
      <Folder Include="Assets\SDF" />
      <Folder Include="Assets\TutorialInfo\Scripts" />
      <Folder Include="Assets\TutorialInfo\Icons" />
      <Folder Include="Assets\TutorialInfo" />
+     <Folder Include="Assets\Model" />
      <None Include="C:\Program Files\Side Effects Software\sidefx_packages\SideFXLabs20.0\unity\shaders\URP_VAT3\package.json" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.10f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
