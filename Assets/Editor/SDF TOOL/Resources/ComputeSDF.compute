@@ -1,0 +1,114 @@
+#pragma kernel setHorizontalMinDist
+#pragma kernel calculateSDF
+#pragma kernel setHorizontalMinDist2
+#pragma kernel calculateSDF2
+#pragma kernel combineSDF
+
+
+
+float _ScaleDown;
+float2 _TexSize;
+RWTexture2D<float> _TempTex;
+Texture2D<float> _OriginalTex;
+RWTexture2D<float> _OutputTex;
+
+
+// 0 计算最小距离
+[numthreads(32,32,1)]
+void setHorizontalMinDist(uint3 id : SV_DispatchThreadID)
+{
+    float currentColor = _OriginalTex[id.xy].r;
+    if (currentColor > 0.5)
+    {
+        _TempTex[id.xy] = 0;
+        return;
+    }
+
+    // 每个点读取横向最小值
+    float minDistance = 999999999;
+    for (int i = 0; i < _TexSize.x; i++)
+    {
+        float distance = (i - id.x) * (i - id.x);
+        float color = _OriginalTex[uint2(i, id.y)].r;
+        if (color > 0.5)
+        {
+            minDistance = min(minDistance, distance);
+        }
+    }
+    _TempTex[id.xy] = minDistance;
+}
+
+// 1 每一列操作，将最小距离写入
+[numthreads(32,32,1)]
+void calculateSDF(uint3 id : SV_DispatchThreadID)
+{
+    float minDistance = 999999999;
+    // 计算每一列的距离
+    for (int i = 0; i < _TexSize.y; i++)
+    {
+        float distance = (i - id.y) * (i - id.y);
+        float color = _TempTex[uint2(id.x, i)].x;
+        minDistance = min(minDistance, sqrt(distance + color));
+    }
+
+    _OutputTex[id.xy] = minDistance / _ScaleDown;
+}
+
+// 2 计算最小距离
+[numthreads(32,32,1)]
+void setHorizontalMinDist2(uint3 id : SV_DispatchThreadID)
+{
+    float currentColor = _OriginalTex[id.xy].r;
+    if (currentColor < 0.5)
+    {
+        _TempTex[id.xy] = 0;
+        return;
+    }
+
+    // 每个点读取横向最小值
+    float minDistance = 999999999;
+    for (int i = 0; i < _TexSize.x; i++)
+    {
+        float distance = (i - id.x) * (i - id.x);
+        float color = _OriginalTex[uint2(i, id.y)].r;
+        if (color < 0.5)
+        {
+            minDistance = min(minDistance, distance);
+        }
+    }
+    _TempTex[id.xy] = minDistance;
+}
+
+// 3 每一列操作，将最小距离写入
+[numthreads(32,32,1)]
+void calculateSDF2(uint3 id : SV_DispatchThreadID)
+{
+    float oriOutput = _OutputTex[id.xy];
+
+    float minDistance = 999999999;
+    // 计算每一列的距离
+    for (int i = 0; i < _TexSize.y; i++)
+    {
+        float distance = (i - id.y) * (i - id.y);
+        float color = _TempTex[uint2(id.x, i)].x;
+        minDistance = min(minDistance, sqrt(distance + color));
+    }
+
+    float dist2 = minDistance / _ScaleDown;
+    _OutputTex[id.xy] = (oriOutput - dist2) * 0.5 + 0.5;
+}
+
+Texture2D<float> _SDF1;
+Texture2D<float> _SDF2;
+float _Weight;
+float _Accuracy;
+// 4 合成SDF
+[numthreads(32,32,1)]
+void combineSDF(uint3 id : SV_DispatchThreadID)
+{
+    float initColor = _OutputTex[id.xy].r;
+    float sdf1 = _SDF1[id.xy];
+    float sdf2 = _SDF2[id.xy];
+    float col = step(sdf1 * _Weight + sdf2 * (1 - _Weight), 0.5);
+    _OutputTex[id.xy] = initColor + col/_Accuracy;
+}

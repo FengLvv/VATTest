@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Custom_Bubble
+  m_Shader: {fileID: 4800000, guid: a45b35e1e907f7247a39cb9213ec72d4, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _CubeMap:
+        m_Texture: {fileID: 8900000, guid: da75575e77bc9304683635a65523ee70, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowMap:
+        m_Texture: {fileID: 2800000, guid: 7f2109261a56b414580ae1d07945a94b, type: 3}
+        m_Scale: {x: 0.92, y: 0.3}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 451ce753bf2bcfa41b0346ec67aee24f, type: 3}
+        m_Scale: {x: 0.3, y: 0.64}
+        m_Offset: {x: 0, y: 0.7}
+    - _SDF:
+        m_Texture: {fileID: 2800000, guid: 91b1a00bd43812b499dd360cac07e8c3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _spectrum:
+        m_Texture: {fileID: 2800000, guid: 5ec14963fbe635343be3a7c97894c74a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AllFrames: 190
+    - _DisplayFrame: 60
+    - _FlowMapStrength: 12.94
+    - _FlowMppSpeed: 1
+    - _FresnelPartial: 0.464
+    - _FresnelPower: 1.74
+    - _FresnelScale: 2.73
+    - _MaxThickNess: 1
+    - _MinThickNess: 0.069
+    - _NormalStrength: 0.2
+    - _PlayFrame: 71
+    - _SpectrogramStrength: 6.7
+    - _ThickNessWarp: 0.485
+    - _TimeOffset: 0
+    - _TimeSpeed: 1
+    - _TransparencyAdjust: -0.5
+    - _TransparencyScale: 2.9
+    - _displayFrame: 70.34
+    m_Colors: []
+  m_BuildTextureStacks: []
